@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logisage - SaaS & AI Automation Solutions</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #0a0a0a;
+            color: #ffffff;
+            overflow-x: hidden;
+            scroll-snap-type: y mandatory;
+            scroll-behavior: smooth;
+        }
+
+        #canvas-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .content {
+            position: relative;
+            z-index: 2;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 2rem 4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            background: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(10px);
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .contact-btn {
+            padding: 0.8rem 2rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            border-radius: 50px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+
+        .contact-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+        }
+
+        section {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 0 4rem;
+            position: relative;
+            scroll-snap-align: start;
+        }
+
+        .hero {
+            padding-top: 10rem;
+        }
+
+        h1 {
+            font-size: 5rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+            opacity: 0;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            color: #a0a0a0;
+            max-width: 600px;
+            margin-bottom: 2rem;
+            opacity: 0;
+        }
+
+        h2 {
+            font-size: 3rem;
+            margin-bottom: 2rem;
+            opacity: 0;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 2rem;
+            backdrop-filter: blur(10px);
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #667eea;
+        }
+
+        .feature-card p {
+            color: #b0b0b0;
+            line-height: 1.6;
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .tech-badge {
+            padding: 0.6rem 1.2rem;
+            background: rgba(102, 126, 234, 0.2);
+            border: 1px solid rgba(102, 126, 234, 0.3);
+            border-radius: 50px;
+            font-size: 0.9rem;
+            opacity: 0;
+        }
+
+        @media (max-width: 768px) {
+            header {
+                padding: 1.5rem 2rem;
+            }
+
+            section {
+                padding: 0 2rem;
+            }
+
+            h1 {
+                font-size: 3rem;
+            }
+
+            h2 {
+                font-size: 2rem;
+            }
+
+            .subtitle {
+                font-size: 1.2rem;
+            }
+
+            .logo {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="canvas-container"></div>
+
+    <div class="content">
+        <header>
+            <div class="logo">LOGISAGE</div>
+            <button class="contact-btn" onclick="window.location.href='mailto:abhi267266@gmail.com'">Contact Us</button>
+        </header>
+
+        <section class="hero">
+            <h1>Building the Future<br>of <span class="gradient-text">SaaS & AI</span></h1>
+            <p class="subtitle">Empowering businesses with intelligent automation and cutting-edge software solutions for B2B and B2C markets.</p>
+        </section>
+
+        <section>
+            <h2><span class="gradient-text">What We Do</span></h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🚀</div>
+                    <h3>SaaS Products</h3>
+                    <p>Scalable cloud-based solutions designed to streamline your operations and drive growth across all business verticals.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🤖</div>
+                    <h3>AI Automation</h3>
+                    <p>Intelligent automation systems that reduce manual work, increase efficiency, and unlock new possibilities for your business.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3>B2B & B2C Solutions</h3>
+                    <p>Versatile products that serve both enterprise clients and end consumers with equal excellence and reliability.</p>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2><span class="gradient-text">Our Tech Stack</span></h2>
+            <p class="subtitle">Built with modern technologies for maximum performance and reliability.</p>
+            <div class="tech-stack">
+                <div class="tech-badge">React</div>
+                <div class="tech-badge">Node.js</div>
+                <div class="tech-badge">Python</div>
+                <div class="tech-badge">Golang</div>
+                <div class="tech-badge">Rust</div>
+                <div class="tech-badge">TensorFlow</div>
+                <div class="tech-badge">n8n</div>
+                <div class="tech-badge">AWS</div>
+                <div class="tech-badge">Docker</div>
+                <div class="tech-badge">Kubernetes</div>
+                <div class="tech-badge">PostgreSQL</div>
+                <div class="tech-badge">Redis</div>
+                <div class="tech-badge">GraphQL</div>
+                <div class="tech-badge">Microservices</div>
+                <div class="tech-badge">Scalable Architecture</div>
+            </div>
+        </section>
+
+        <section>
+            <h2><span class="gradient-text">Ready to Transform?</span></h2>
+            <div style="max-width: 600px;">
+                <p class="subtitle" style="margin: 0 0 2rem 0;">Let's discuss how Logisage can elevate your business with custom SaaS solutions and AI automation.</p>
+                <button class="contact-btn" onclick="window.location.href='mailto:abhi267266@gmail.com'" style="padding: 1rem 3rem; font-size: 1.1rem;">Get in Touch</button>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Three.js Scene Setup
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.getElementById('canvas-container').appendChild(renderer.domElement);
+
+        // Create abstract 3D structure
+        const geometry = new THREE.TorusKnotGeometry(10, 3, 200, 32);
+        const material = new THREE.MeshNormalMaterial({
+            wireframe: true,
+            transparent: true,
+            opacity: 0.6
+        });
+        const torusKnot = new THREE.Mesh(geometry, material);
+        scene.add(torusKnot);
+
+        // Add particles
+        const particlesGeometry = new THREE.BufferGeometry();
+        const particlesCount = 3000;
+        const posArray = new Float32Array(particlesCount * 3);
+
+        for(let i = 0; i < particlesCount * 3; i++) {
+            posArray[i] = (Math.random() - 0.5) * 100;
+        }
+
+        particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+        const particlesMaterial = new THREE.PointsMaterial({
+            size: 0.05,
+            color: 0x667eea,
+            transparent: true,
+            opacity: 0.8
+        });
+
+        const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
+        scene.add(particlesMesh);
+
+        camera.position.z = 30;
+
+        // Animation loop
+        let scrollY = 0;
+        function animate() {
+            requestAnimationFrame(animate);
+
+            // Rotate based on scroll
+            torusKnot.rotation.x = scrollY * 0.0005;
+            torusKnot.rotation.y = scrollY * 0.0008;
+            torusKnot.rotation.z = scrollY * 0.0003;
+
+            particlesMesh.rotation.y = scrollY * 0.0002;
+
+            renderer.render(scene, camera);
+        }
+        animate();
+
+        // Scroll listener
+        window.addEventListener('scroll', () => {
+            scrollY = window.scrollY;
+        });
+
+        // Resize handler
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+        // Anime.js animations
+        anime({
+            targets: 'h1',
+            opacity: [0, 1],
+            translateY: [50, 0],
+            delay: 300,
+            duration: 1200,
+            easing: 'easeOutExpo'
+        });
+
+        anime({
+            targets: '.subtitle',
+            opacity: [0, 1],
+            translateY: [30, 0],
+            delay: 600,
+            duration: 1200,
+            easing: 'easeOutExpo'
+        });
+
+        // Scroll-triggered animations
+        const observerOptions = {
+            threshold: 0.2,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    if (entry.target.tagName === 'H2') {
+                        anime({
+                            targets: entry.target,
+                            opacity: [0, 1],
+                            translateY: [50, 0],
+                            duration: 1000,
+                            easing: 'easeOutExpo'
+                        });
+                    }
+                    
+                    if (entry.target.classList.contains('feature-card')) {
+                        anime({
+                            targets: entry.target,
+                            opacity: [0, 1],
+                            translateY: [30, 0],
+                            duration: 800,
+                            easing: 'easeOutExpo'
+                        });
+                    }
+
+                    if (entry.target.classList.contains('tech-badge')) {
+                        anime({
+                            targets: entry.target,
+                            opacity: [0, 1],
+                            scale: [0.8, 1],
+                            duration: 600,
+                            easing: 'easeOutElastic(1, .8)'
+                        });
+                    }
+                }
+            });
+        }, observerOptions);
+
+        // Observe elements
+        document.querySelectorAll('h2, .feature-card, .tech-badge').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
