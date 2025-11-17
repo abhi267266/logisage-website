@@ -6,6 +6,7 @@
     <title>Logisage - SaaS & AI Automation Solutions</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+
     <style>
         * {
             margin: 0;
@@ -36,12 +37,15 @@
             z-index: 2;
         }
 
+        /***********************
+            HEADER + LOGO
+        ************************/
         header {
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
-            padding: 2rem 4rem;
+            padding: 1rem 4rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -50,13 +54,36 @@
             backdrop-filter: blur(10px);
         }
 
+        /* LOGO CONTAINER - Holds the Gradient & Mask */
         .logo {
-            font-size: 1.8rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            position: relative;
+            display: inline-block;
+            
+            /* 1. The Gradient Color */
+            background: linear-gradient(135deg, #667eea, #764ba2, #f093fb);
+            
+            /* 2. The Mask - Cuts the gradient into the shape of logo.png */
+            -webkit-mask-image: url('logo.png');
+            mask-image: url('logo.png');
+            
+            /* 3. Mask positioning */
+            -webkit-mask-size: contain;
+            mask-size: contain;
+            -webkit-mask-repeat: no-repeat;
+            mask-repeat: no-repeat;
+            -webkit-mask-position: center;
+            mask-position: center;
+        }
+
+        /* LOGO IMAGE - Defines the size, but is invisible */
+        .logo img {
+            height: 8vw;
+            max-height: 80px;
+            min-height: 45px;
+            width: auto;
+            display: block;
+            opacity: 0; /* Invisible, but takes up space */
+            pointer-events: none;
         }
 
         .contact-btn {
@@ -76,6 +103,9 @@
             box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
         }
 
+        /***********************
+                SECTIONS
+        ************************/
         section {
             min-height: 100vh;
             display: flex;
@@ -88,6 +118,62 @@
 
         .hero {
             padding-top: 10rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .hero-content {
+            flex: 1;
+        }
+
+        /***********************
+             HERO IMAGE
+        ************************/
+        /* HERO CONTAINER - Holds the Gradient & Mask */
+        .hero-image {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+
+            /* 1. The Gradient Color */
+            background: linear-gradient(135deg, #667eea, #764ba2, #f093fb);
+
+            /* 2. The Mask - Cuts the gradient into the shape of hero-brain.png */
+            -webkit-mask-image: url('hero-brain.png');
+            mask-image: url('hero-brain.png');
+
+            /* 3. Mask positioning */
+            -webkit-mask-size: contain;
+            mask-size: contain;
+            -webkit-mask-repeat: no-repeat;
+            mask-repeat: no-repeat;
+            -webkit-mask-position: center;
+            mask-position: center;
+
+            /* Animations applied to the container */
+            animation: float 6s ease-in-out infinite, glow 6s ease-in-out infinite;
+        }
+
+        /* HERO IMAGE - Defines size, invisible */
+        .hero-image img {
+            width: 100%;
+            max-width: 500px;
+            display: block;
+            opacity: 0; /* Invisible, but takes up space */
+        }
+
+        /* Glow effect on the container */
+        @keyframes glow {
+            0%, 100% { filter: drop-shadow(0 0 12px rgba(102,126,234,0.5)); }
+            50% { filter: drop-shadow(0 0 24px rgba(240,147,251,0.7)); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
         }
 
         h1 {
@@ -189,24 +275,36 @@
                 font-size: 1.2rem;
             }
 
-            .logo {
-                font-size: 1.5rem;
+            .logo img {
+                height: 12vw;
+                max-height: 70px;
+                min-height: 40px;
             }
         }
     </style>
 </head>
+
 <body>
     <div id="canvas-container"></div>
 
     <div class="content">
+
         <header>
-            <div class="logo">LOGISAGE</div>
-            <button class="contact-btn" onclick="window.location.href='mailto:abhi267266@gmail.com'">Contact Us</button>
+            <div class="logo">
+                <img src="logo.png" alt="LOGISAGE">
+            </div>
+            <button class="contact-btn" onclick="window.location.href='mailto:your.email@logisage.com'">Contact Us</button>
         </header>
 
         <section class="hero">
-            <h1>Building the Future<br>of <span class="gradient-text">SaaS & AI</span></h1>
-            <p class="subtitle">Empowering businesses with intelligent automation and cutting-edge software solutions for B2B and B2C markets.</p>
+            <div class="hero-content">
+                <h1>Building the Future<br>of <span class="gradient-text">SaaS & AI</span></h1>
+                <p class="subtitle">Empowering businesses with intelligent automation and cutting-edge software solutions for B2B and B2C markets.</p>
+            </div>
+
+            <div class="hero-image">
+                <img src="hero-brain.png" alt="AI Brain">
+            </div>
         </section>
 
         <section>
@@ -256,20 +354,19 @@
             <h2><span class="gradient-text">Ready to Transform?</span></h2>
             <div style="max-width: 600px;">
                 <p class="subtitle" style="margin: 0 0 2rem 0;">Let's discuss how Logisage can elevate your business with custom SaaS solutions and AI automation.</p>
-                <button class="contact-btn" onclick="window.location.href='mailto:abhi267266@gmail.com'" style="padding: 1rem 3rem; font-size: 1.1rem;">Get in Touch</button>
+                <button class="contact-btn" onclick="window.location.href='mailto:your.email@logisage.com'" style="padding: 1rem 3rem; font-size: 1.1rem;">Get in Touch</button>
             </div>
         </section>
     </div>
 
     <script>
-        // Three.js Scene Setup
+        /* Three.js Background Scene */
         const scene = new THREE.Scene();
         const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
         const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
         renderer.setSize(window.innerWidth, window.innerHeight);
         document.getElementById('canvas-container').appendChild(renderer.domElement);
 
-        // Create abstract 3D structure
         const geometry = new THREE.TorusKnotGeometry(10, 3, 200, 32);
         const material = new THREE.MeshNormalMaterial({
             wireframe: true,
@@ -279,16 +376,19 @@
         const torusKnot = new THREE.Mesh(geometry, material);
         scene.add(torusKnot);
 
-        // Add particles
         const particlesGeometry = new THREE.BufferGeometry();
         const particlesCount = 3000;
         const posArray = new Float32Array(particlesCount * 3);
 
-        for(let i = 0; i < particlesCount * 3; i++) {
+        for (let i = 0; i < particlesCount * 3; i++) {
             posArray[i] = (Math.random() - 0.5) * 100;
         }
 
-        particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+        particlesGeometry.setAttribute(
+            'position',
+            new THREE.BufferAttribute(posArray, 3)
+        );
+
         const particlesMaterial = new THREE.PointsMaterial({
             size: 0.05,
             color: 0x667eea,
@@ -301,12 +401,10 @@
 
         camera.position.z = 30;
 
-        // Animation loop
         let scrollY = 0;
         function animate() {
             requestAnimationFrame(animate);
 
-            // Rotate based on scroll
             torusKnot.rotation.x = scrollY * 0.0005;
             torusKnot.rotation.y = scrollY * 0.0008;
             torusKnot.rotation.z = scrollY * 0.0003;
@@ -317,19 +415,16 @@
         }
         animate();
 
-        // Scroll listener
         window.addEventListener('scroll', () => {
             scrollY = window.scrollY;
         });
 
-        // Resize handler
         window.addEventListener('resize', () => {
             camera.aspect = window.innerWidth / window.innerHeight;
             camera.updateProjectionMatrix();
             renderer.setSize(window.innerWidth, window.innerHeight);
         });
 
-        // Anime.js animations
         anime({
             targets: 'h1',
             opacity: [0, 1],
@@ -348,7 +443,7 @@
             easing: 'easeOutExpo'
         });
 
-        // Scroll-triggered animations
+        /* Scroll animations */
         const observerOptions = {
             threshold: 0.2,
             rootMargin: '0px 0px -100px 0px'
@@ -366,7 +461,7 @@
                             easing: 'easeOutExpo'
                         });
                     }
-                    
+
                     if (entry.target.classList.contains('feature-card')) {
                         anime({
                             targets: entry.target,
@@ -390,10 +485,10 @@
             });
         }, observerOptions);
 
-        // Observe elements
         document.querySelectorAll('h2, .feature-card, .tech-badge').forEach(el => {
             observer.observe(el);
         });
     </script>
+
 </body>
 </html>
