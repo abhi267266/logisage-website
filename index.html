@@ -254,7 +254,7 @@
             opacity: 0;
         }
 
-        @media (max-width: 768px) {
+@media (max-width: 768px) {
             header {
                 padding: 1.5rem 2rem;
             }
@@ -263,16 +263,32 @@
                 padding: 0 2rem;
             }
 
+            /* 1. Hide the Hero Brain Image */
+            .hero-image {
+                display: none;
+            }
+
+            /* 2. Make the Hero Text take full width */
+            .hero {
+                grid-template-columns: 1fr; /* Switch from 2 columns to 1 */
+                text-align: center; /* Center align text for better mobile look */
+                padding-top: 8rem; /* Reduce top padding slightly */
+                gap: 2rem;
+            }
+            
+            /* Center the subtitle on mobile */
+            .subtitle {
+                margin-left: auto;
+                margin-right: auto;
+                font-size: 1.2rem;
+            }
+
             h1 {
                 font-size: 3rem;
             }
 
             h2 {
                 font-size: 2rem;
-            }
-
-            .subtitle {
-                font-size: 1.2rem;
             }
 
             .logo img {
@@ -293,7 +309,7 @@
             <div class="logo">
                 <img src="logo.png" alt="LOGISAGE">
             </div>
-            <button class="contact-btn" onclick="window.location.href='mailto:your.email@logisage.com'">Contact Us</button>
+            <button class="contact-btn" onclick="window.location.href='mailto:abhi267266@gmail.com'">Contact Us</button>
         </header>
 
         <section class="hero">
@@ -354,7 +370,7 @@
             <h2><span class="gradient-text">Ready to Transform?</span></h2>
             <div style="max-width: 600px;">
                 <p class="subtitle" style="margin: 0 0 2rem 0;">Let's discuss how Logisage can elevate your business with custom SaaS solutions and AI automation.</p>
-                <button class="contact-btn" onclick="window.location.href='mailto:your.email@logisage.com'" style="padding: 1rem 3rem; font-size: 1.1rem;">Get in Touch</button>
+                <button class="contact-btn" onclick="window.location.href='mailto:abhi267266@gmail.com'" style="padding: 1rem 3rem; font-size: 1.1rem;">Get in Touch</button>
             </div>
         </section>
     </div>
